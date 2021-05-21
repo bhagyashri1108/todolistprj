@@ -1,0 +1,24 @@
+body{
+    background-color: cornflowerblue;
+}
+
+div{
+    font-family:cursive;
+    text-align: center;
+    color: white;
+}
+
+button{
+    
+    font-size: 13px;
+    font-weight:lighter;
+    background:floralwhite;
+    width:70px;
+    padding:7px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);    
+}

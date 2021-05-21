@@ -1,0 +1,51 @@
+body{
+    background-color: cornflowerblue;
+}
+
+input{
+    color: black;
+    align-items:center;
+    border: none;
+    background: transparent;
+    border-radius: 3px;
+    width: 250px;
+    padding: 12px;
+    margin-bottom: 5px;
+    outline:none;
+    border-bottom:1px solid black;
+}
+
+Form{
+    background-color: white;
+    padding: 1.1em;
+    margin:0 auto;
+    bottom:30%;
+    left:530px;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+}
+
+.users{
+    padding: 2px;
+    margin: 3px;
+    width:300px;
+    margin:0 auto;
+    background: white;
+    border-radius: 10px;
+    color: black;
+}
+
+button{
+    font-family: "Lato",sans-serif;
+    font-size: 11px;
+    background: #1e90FF ;
+    width:70px;
+    padding:.5em 1em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);    
+}
