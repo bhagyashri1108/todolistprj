@@ -1,16 +1,16 @@
 const mongose=require('mongoose');
 
 var courseschema=new mongose.Schema({
-    list:{
+    list:[{
         type:String,
         required:"Required"
-    },
+    }],
     task:{
         type:String,
         required:"Required"
     },
     task_time:{
-        type:String,
+        type:Date,
         required:"Required"
     },
     fav:{

@@ -7,9 +7,9 @@ export default class todolist extends React.Component {
     super(props)
   
     this.state = {
-      listname:'',
+      listname:[],
       taskname:'',
-      time:'',
+      time:new Date(),
       favorite:false,    
       items:[] 
     }

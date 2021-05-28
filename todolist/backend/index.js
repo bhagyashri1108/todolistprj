@@ -15,50 +15,30 @@ mongose.connect('mongodb://localhost:27017/listdb',{ useNewUrlParser: true, useC
 });
 
 
-app.get('/api/tasks',(req,res)=>{
+app.get('/api/tasks',async(req,res)=>{
    let tasks=[];
-    obj.find({},function(err,docs){
-        if(err)res.json(err);
-        else {
-            //console.log(typeof(docs));
-            //console.log(typeof(docs))
-            tasks=docs
-            console.log(tasks);
-            console.log(typeof(tasks));
-            /*
-            var favar=tasks.filter( (e1) =>{
-                return e1.fav===true
-            }) 
-            console.log('favar is',favar)
-            
-            var nonfavar=tasks.filter( (e2) =>{
-                return e2.fav===false
-            })
-            console.log('nonfavar is',nonfavar)
-            tasks=favar.concat(nonfavar);
-            console.log('final output',tasks);   
-            console.log(typeof(tasks)); */
-            res.json(tasks) 
-        }
-    }) 
-    /*
-    const tasks=[
-        {listname:'homework',taskname:'sciene',time:6,favorite:'yes'}
-    ];*/ 
-    //res.json(tasks)
+   try{
+        tasks=await obj.find({});
+        console.log(tasks);
+        res.status(200).send(tasks);
+        //console.log(typeof(tasks));
+        //res.json(tasks) 
+    }catch(error){
+        res.status(500).send(error);
+    } 
 });
 
 app.post('/api/take',async(req,res) =>{
     
     const newtask= new obj({
-        list:req.body.it.listname,
+        list:[req.body.it.listname],
         task:req.body.it.taskname,
         task_time:req.body.it.time,
         fav:req.body.it.favorite
     }); 
     
     //console.log(newtask);
-    //console.log(task_time);
+    console.log(req.body.it.time);
     try{
         await newtask.save();
         res.status(201).send(newtask);
@@ -81,6 +61,54 @@ app.post('/api/take',async(req,res) =>{
     console.log(req.body.it.taskname);
     console.log(req.body.it.listname);
 });
+
+
+app.put('/api/update/:id' , async(req,res)=> {
+    
+    console.log(req.body.objt.list);
+    console.log(req.body.objt.task_time);
+    console.log(req.body.objt.task);
+    console.log(req.body.objt.fav); 
+    //console.log(req.body.objt);
+   try{
+
+        conds={list:req.body.objt.list,task:req.body.objt.task};
+        const docs=await obj.updateOne({_id:req.params.id},conds);
+        console.log(docs);
+        if(docs){
+            res.status(201).send(docs);
+            console.log('value updated....')
+        }
+        return res.status(404).send();
+    }catch(error){
+        res.status(500).send(error);
+    }  
+});
+
+
+app.delete('/api/delete/:id',async(req,res)=>{
+
+    try{
+        const docs=await obj.findByIdAndRemove(req.params.id);
+        if(docs)
+        {
+            res.status(201).send(docs);
+            console.log('item removed');
+        }
+        res.status(404).send();
+    }
+    catch(error){
+        res.status(500).send(error);
+    }
+    //console.log(req.body.objt);
+    console.log(req.params.id);
+
+   /*console.log(req.body.objt.list);
+    console.log(req.body.objt.task_time);
+    console.log(req.body.objt.task);
+    console.log(req.body.objt.fav);  */
+});
+
 
 app.listen(5000,(req,res) => {
     console.log('server is listening')
